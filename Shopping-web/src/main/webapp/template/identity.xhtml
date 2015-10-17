@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<div class="user-panel">
+	
+            <div class="pull-left image">
+              <h:graphicImage library="images" name="ic_account.png" class="img-circle" alt="User Image"/>
+            </div>
+            <div class="pull-left info">
+              <p><h:outputText value="Welcome: #{authBean.user.login}" /></p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <h:form rendered="#{authBean.loggedIn}">
+              <h:commandLink value="Logout" action="#{authBean.doLogout()}" />
+               </h:form>
+            </div>
+   
+    </div>
+	
+	
+</ui:composition>

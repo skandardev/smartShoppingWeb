@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+        <li class="dropdown user user-menu">
+        
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <h:graphicImage library="images" name="ic_account.png" class="user-image" alt="User Image"/>
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs"><h:outputText value="#{authBean.user.login}" /></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <h:graphicImage library="images" name="ic_account.png" class="img-circle" alt="User Image"/>
+                    <p>
+                      <h:outputText value="#{authBean.user.login}" />
+                      <small><h:outputText value="#{authBean.user.email}" /></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" >Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      
+                      
+	                      <h:form rendered="#{authBean.loggedIn}">
+	                       <h:commandLink value="Logout" action="#{authBean.doLogout()}" />
+	                      </h:form> 
+                      
+                      
+                    </div>
+                  </li>
+                </ul>
+               
+              </li>
+	
+	
+</ui:composition>

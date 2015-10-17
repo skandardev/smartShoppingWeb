@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/default.xhtml">
+	
+	
+
+	<ui:define name="pageTitle">Admin-Produit</ui:define>
+	<ui:define name="pageContent">
+		<section class="content-header">
+          <h1>
+            Products
+            <small>list</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Product</a></li>
+            <li class="active">list</li>
+          </ol>
+        </section>
+		
+		<ui:include src="/pages/admin/produit/list.xhtml" />
+		<ui:include src="/pages/admin/produit/form.xhtml" />
+	</ui:define>
+</ui:composition>
