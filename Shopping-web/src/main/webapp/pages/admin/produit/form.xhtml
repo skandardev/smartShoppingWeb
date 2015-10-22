@@ -6,8 +6,8 @@
      
 	<h:form rendered="#{productBean.formDisplay}">
 			<div class="form-group">
-				<h:outputText value="id" />
-				<h:inputText readonly="true" class="form-control" value="#{productBean.product.id}" />
+				
+				<h:inputHidden readonly="true" class="form-control" value="#{productBean.product.id}" />
 			</div>
 			<div class="form-group">
 				<h:outputText value="name" />
@@ -19,7 +19,9 @@
 			</div>
 			<div class="form-group">
 				<h:outputText value="bar code" />
-				<h:inputText class="form-control" value="#{productBean.product.barCode}" />
+				<h:inputText class="form-control"  value="#{productBean.product.barCode}" >
+				<f:convertNumber integerOnly="true" type="number" minIntegerDigits="13"/>
+				</h:inputText>
 			</div>
 			<div class="form-group">
 				<h:outputText value="Category" />

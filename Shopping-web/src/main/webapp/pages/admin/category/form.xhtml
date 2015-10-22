@@ -5,8 +5,7 @@
 	<div class="box-body">
 	<h:form rendered="#{categoriyBean.formDisplay}">
 			<div class="form-group">
-				<h:outputText value="id" />
-				<h:inputText readonly="true" class="form-control" value="#{categoriyBean.category.id}" />
+				<h:inputHidden readonly="true" class="form-control" value="#{categoriyBean.category.id}" />
 			</div>
 			<div class="form-group">
 				<h:outputText value="name" />
