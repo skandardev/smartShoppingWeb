@@ -1,11 +1,15 @@
 package shopping.managedBeans;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 
 import shopping.model.Category;
 import shopping.model.Product;
@@ -16,7 +20,9 @@ import shopping.service.CatalogServiceLocal;
 @ManagedBean
 @ViewScoped
 public class ProductBean {
-
+	
+	private Part file1;
+	String realPath;
 	private Category category = new Category();
 	private Product product = new Product();
 
@@ -51,13 +57,36 @@ public class ProductBean {
 	}
 
 	public String doSave() {
+		ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
+				.getExternalContext().getContext();
+		realPath = ctx.getRealPath("/");
+		System.out.println("#############"+ctx.getContextPath());
+		try {
+			file1.write(realPath + "\\upload\\" + getFilename(file1));
+		} catch (IOException e) {
+		}
+			
 		product.setCategory(category);
+	    product.setImage("http://localhost:8383/"+ctx.getContextPath()+"/upload/" + getFilename(file1));
 		catalogServiceLocal.saveOrUpdateProduct(product);
 		init();
 		formDisplay = false;
 		return null;
 	}
 
+	private static String getFilename(Part part) {
+		for (String cd : part.getHeader("content-disposition").split(";")) {
+			if (cd.trim().startsWith("filename")) {
+				String filename = cd.substring(cd.indexOf('=') + 1).trim()
+						.replace("\"", "");
+				return filename.substring(filename.lastIndexOf('/') + 1)
+						.substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+			}
+		}
+		return null;
+	}
+
+	
 	public boolean isFormDisplay() {
 		return formDisplay;
 	}
@@ -99,5 +128,23 @@ public class ProductBean {
 	public void setProduits(List<Product> produits) {
 		this.produits = produits;
 	}
+
+	public Part getFile1() {
+		return file1;
+	}
+
+	public void setFile1(Part file1) {
+		this.file1 = file1;
+	}
+	
+	public String getRealPath() {
+		return realPath;
+	}
+
+	public void setRealPath(String realPath) {
+		this.realPath = realPath;
+	}
+	
+	
 
 }

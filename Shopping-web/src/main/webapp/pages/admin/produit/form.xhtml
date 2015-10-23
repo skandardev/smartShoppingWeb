@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	 <div class="box-body">
      
-	<h:form rendered="#{productBean.formDisplay}">
+	<h:form rendered="#{productBean.formDisplay}" enctype="multipart/form-data">
 			<div class="form-group">
 				
 				<h:inputHidden readonly="true" class="form-control" value="#{productBean.product.id}" />
@@ -30,7 +30,9 @@
 						itemValue="#{cat}" itemLabel="#{cat.name}" />
 				</h:selectOneMenu>
 			</div>
-			
+			<div class="form-group">
+				<h:inputFile value="#{productBean.file1}" /><br/>
+			</div>
 			<div class="form-group">
 				<span><h:commandButton class="btn btn-primary" value="Cancel" action="#{productBean.doCancel()}" /></span>
 				<span style="margin-left: 10px;"><h:commandButton class="btn btn-primary" value="Delete" action="#{productBean.doDelete()}" /></span>

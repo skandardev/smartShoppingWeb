@@ -35,6 +35,12 @@
 			<h:outputText value="#{prod.category.name}" />
 		</h:column>
 		<h:column>
+			<f:facet name="header">Image</f:facet>
+			<div>
+			</div>
+			<h:graphicImage value="#{prod.image}" width="50" height="50"/>
+		</h:column>
+		<h:column>
 			<f:facet name="header">Action</f:facet>
 			<h:form>
 				<h:commandButton value="select" class="btn btn-primary">
