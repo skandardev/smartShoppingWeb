@@ -57,18 +57,18 @@ public class ProductBean {
 	}
 
 	public String doSave() {
-		ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
-				.getExternalContext().getContext();
-		realPath = ctx.getRealPath("/");
-		System.out.println("#############"+ctx.getContextPath());
+		
 		try {
+			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
+					.getExternalContext().getContext();
+			realPath = ctx.getRealPath("/");
+			System.out.println("#############"+ctx.getContextPath());
 			file1.write(realPath + "\\upload\\" + getFilename(file1));
+			product.setImage("http://localhost:8383/"+ctx.getContextPath()+"/upload/" + getFilename(file1));	
 		} catch (IOException e) {
 		}
-			
 		product.setCategory(category);
-	    product.setImage("http://localhost:8383/"+ctx.getContextPath()+"/upload/" + getFilename(file1));
-		catalogServiceLocal.saveOrUpdateProduct(product);
+	    catalogServiceLocal.saveOrUpdateProduct(product);
 		init();
 		formDisplay = false;
 		return null;
@@ -130,11 +130,21 @@ public class ProductBean {
 	}
 
 	public Part getFile1() {
-		return file1;
+		try {
+			return file1;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public void setFile1(Part file1) {
-		this.file1 = file1;
+		try {
+			this.file1 = file1;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	public String getRealPath() {

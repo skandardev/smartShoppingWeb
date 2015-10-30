@@ -5,13 +5,14 @@
 	 <div class="box-body">
      
 	<h:form rendered="#{productBean.formDisplay}" enctype="multipart/form-data">
-			<div class="form-group">
-				
+			<div class="form-group">				
 				<h:inputHidden readonly="true" class="form-control" value="#{productBean.product.id}" />
 			</div>
 			<div class="form-group">
 				<h:outputText value="name" />
-				<h:inputText class="form-control" value="#{productBean.product.name}" />
+				<h:inputText id="name" class="form-control" value="#{productBean.product.name}" 
+				required="true"/><br/>
+				<h:message for="name" style="color: red;" />
 			</div>
 			<div class="form-group">
 				<h:outputText value="price" />
@@ -19,9 +20,10 @@
 			</div>
 			<div class="form-group">
 				<h:outputText value="bar code" />
-				<h:inputText class="form-control"  value="#{productBean.product.barCode}" >
+				<h:inputText id="code" class="form-control"  value="#{productBean.product.barCode}" required="true">
 				<f:convertNumber integerOnly="true" type="number" minIntegerDigits="13"/>
-				</h:inputText>
+				</h:inputText><br/>
+				<h:message for="code" style="color: red;" />
 			</div>
 			<div class="form-group">
 				<h:outputText value="Category" />
@@ -31,7 +33,9 @@
 				</h:selectOneMenu>
 			</div>
 			<div class="form-group">
-				<h:inputFile value="#{productBean.file1}" /><br/>
+				<h:inputFile id="file" value="#{productBean.file1}" 
+				 required="true"/><br/>
+				 <h:message for="file" style="color: red;" />
 			</div>
 			<div class="form-group">
 				<span><h:commandButton class="btn btn-primary" value="Cancel" action="#{productBean.doCancel()}" /></span>
